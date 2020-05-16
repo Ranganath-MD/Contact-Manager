@@ -9,6 +9,7 @@ import Login from "./components/Login"
 import Account from "./components/Account"
 import axios from './axios/axios-config';
 import ContactForm from "./components/contact/ContactForm"
+
 class App extends React.Component{
   constructor() {
     super()
@@ -66,6 +67,7 @@ class App extends React.Component{
               </h2> : <h2 className="nav-item">Hi, {localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username :null }</h2>}
 
             </div>
+
             <div>
               {
                 this.state.auth &&
@@ -86,6 +88,7 @@ class App extends React.Component{
           </div>
 
           <div className="main-component">
+
             <Toast
               className={this.state.msgType === "success" ? "toast" : "toast-error"}
               onClose={() => this.setState({ show: false })}

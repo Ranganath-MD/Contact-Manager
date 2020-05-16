@@ -1,5 +1,6 @@
 .main-container {
     background: aliceblue;
+    position: relative;
 }
 
 .nav-item {
@@ -8,6 +9,11 @@
     color: #2a0154;
     text-decoration: none;
     cursor: pointer;
+}
+
+.home {
+    display: flex;
+    width: 50%;
 }
 
 .nav-item:hover {
@@ -24,6 +30,11 @@
     border-bottom: 4px solid orange;
 }
 
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
 .nav-item:hover {
     text-decoration: none;
 }
@@ -31,14 +42,21 @@
 .main-component {
     border-radius: 10px;
     padding: 2% 5%;
+    height: 88vh;
     /* box-shadow: 3px 4px 15px lightgrey; */
     position: relative;
-    background-image: url("../bg2.svg");
+    background-image: url("../assets/bg2.svg");
     background-position: top;
 }
 
 .home-container {
     position: relative;
+}
+
+.home_col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .notebook-img {
@@ -169,7 +187,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 12%;
+    margin-top: 10%;
 }
 
 .add_container {
@@ -217,13 +235,31 @@
     background: rgb(114, 93, 190);
 }
 
+.account-name {
+    font-size: 3rem;
+}
+
+.tech_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.acc_col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10%;
+}
+
 @media screen and (max-width: 702px) {
     .nav-bar {
         display: block;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
     .row {
         display: flex;
         flex-direction: column-reverse;

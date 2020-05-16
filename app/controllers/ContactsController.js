@@ -91,7 +91,10 @@ router.put('/:id', authenticateUser, function (req, res) {
         _id: id
     }, { $set: body }, { new: true, runValidators: true })
         .then(function (contact) {
-            res.send(contact)
+            res.send({
+                message: "Successfully updated the record",
+                contact
+            })
         })
         .catch(function (err) {
             res.send(err)

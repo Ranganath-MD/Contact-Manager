@@ -4,21 +4,23 @@ import {Link } from "react-router-dom"
 import { Row, Col, Modal, Button } from "react-bootstrap"
 import { connect } from "react-redux"
 import { getContacts, deleteContacts } from "../../redux-store/Actions"
-import Avatar from "../../avatar.png"
-import Add from "../../Add1.png"
-import AddContact from "../../add2.png"
-import HideImg from "../../delete1.png"
-import NotFoundImg from "../../norecord.svg"
+import Avatar from "../../assets/avatar.png"
+import Add from "../../assets/Add1.png"
+import AddContact from "../../assets/add2.png"
+import HideImg from "../../assets/delete1.png"
+import NotFoundImg from "../../assets/norecord.svg"
 import ContactForm from "./ContactForm"
 import ContactShow from "./ContactShow"
+
 class ContactList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            contact: {},
+            id: "",
             show: false,
             showContactform: false,
-            modalShow: false
+            modalShow: false,
+            showEditForm: false
         }
     }
     componentDidMount() {
@@ -31,7 +33,7 @@ class ContactList extends Component {
             })
     }
     handleShowMore = (contact) => {
-        this.setState(() => ({ contact, show: true, showContactform: false }))
+        this.setState(() => ({ id: contact._id, show: true, showContactform: false, showEditForm: false }))
     }
 
     handleAddContact = () => {
@@ -46,9 +48,11 @@ class ContactList extends Component {
         }))
     }
 
-    handleDelteRecord = () => {
-        const { _id } = this.state.contact
-        axios.delete(`contacts/${_id}`)
+    handleShow = () => {
+        this.setState({ show: false })
+    }
+    handleDeleteRecord = () => {
+        axios.delete(`contacts/${this.state.id}`)
             .then(response => {
                 this.props.dispatch(deleteContacts(response.data.contact._id))
                 this.setState({ modalShow: false, show: false})
@@ -56,8 +60,16 @@ class ContactList extends Component {
             .catch(err => console.log(err.response))
     }
 
-    render() {
+    handleEditForm = () => {
+        this.setState(prevState => ({
+            showEditForm: !prevState.showEditForm
+        }))
+    }
+    handleShow = () => {
+        this.setState({showContactform : false})
+    }
 
+    render() {
         return (
             <div>
                 <Modal
@@ -70,7 +82,7 @@ class ContactList extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleModal}>Close</Button>
-                        <Button variant="primary" onClick={this.handleDelteRecord}>Yes</Button>
+                        <Button variant="primary" onClick={this.handleDeleteRecord}>Yes</Button>
                     </Modal.Footer>
                 </Modal>
                 <div className="container1">
@@ -121,11 +133,13 @@ class ContactList extends Component {
                                 </Col>
                                 <Col xs={12} md={7}>
                                     {
-                                        this.state.showContactform ? <ContactForm /> :
+                                        this.state.showContactform ? <ContactForm handleShow={this.handleShow}/> :
                                             <ContactShow
-                                                contact={this.state.contact}
+                                                id={this.state.id}
                                                 show={this.state.show}
                                                 handleModal={this.handleModal}
+                                                handleEditForm={this.handleEditForm}
+                                                showEditForm={this.state.showEditForm}
                                             />
                                     }
 

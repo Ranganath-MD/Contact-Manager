@@ -8,10 +8,10 @@ import configureStore from "./redux-store/store"
 const store = configureStore()
 
 store.subscribe(() => {
-  console.log(store.getState())
+  return store.getState()
 })
 
-console.log(store.getState())
+
 
 const jsx = (
   <Provider store={store}>
