@@ -2,7 +2,7 @@
 
 Contact Manager is an application created using React and Node JS
 
-![contact pic](/src/assets/screenshot.PNG)
+![contact pic](https://github.com/Ranganath-MD/Contact-Manager/blob/master/client/src/assets/screenshot.PNG)
 
 In the project directory, you can run:
 
