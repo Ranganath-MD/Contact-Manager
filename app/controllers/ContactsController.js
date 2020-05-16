@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { authenticateUser } = require("../middlewares/authentication")
 const { Contact } = require('../models/Contact')
-
+const { User } = require("../models/User")
 // localhost:3005/contacts
 router.get('/', authenticateUser, function (req, res) {
-    // Contact.find({ user: req.user._id})
-    Contact.find()
+    Contact.find({ user: req.user._id})
         .then(function (contacts) {
             res.send(contacts)
         })
@@ -21,10 +20,25 @@ router.post('/', authenticateUser, function (req, res) {
     contact.user = req.user._id
     contact.save()
         .then(function (contact) {
+            const { user } = contact
+            User.findOne(user)
+                .then(user => {
+                    user.contacts.push(contact._id)
+                    user.save()
+                        .then(user => { })
+                        .catch(err => {})
+                })
             res.send({
-                message: "Successfully added your contact",
+                message: "successfully added the contact",
                 contact
             })
+            // Contact.find({ user: req.user._id })
+            //     .then(function (contacts) {
+            //         res.send(contacts)
+            //     })
+            //     .catch(function (err) {
+            //         res.send(err)
+            //     })
         })
         .catch(function (err) {
             res.send(err)
@@ -57,7 +71,10 @@ router.delete('/:id', authenticateUser, function (req, res) {
         _id: id
     })
         .then(function (contact) {
-            res.send(contact)
+            res.send({
+                message: "successfully deleted the contact",
+                contact
+            })
         })
         .catch(function (err) {
             res.send(err)

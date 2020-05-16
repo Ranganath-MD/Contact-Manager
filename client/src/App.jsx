@@ -8,7 +8,7 @@ import Register from "./components/Register"
 import Login from "./components/Login"
 import Account from "./components/Account"
 import axios from './axios/axios-config';
-
+import ContactForm from "./components/contact/ContactForm"
 class App extends React.Component{
   constructor() {
     super()
@@ -20,31 +20,25 @@ class App extends React.Component{
     }
   }
 
+
   handleIsAuthenticated = (bool) => {
     this.setState(() => ({
       auth: bool
     }))
   }
 
-
-  redirectTo = () => {
-    setTimeout(() => {
-      this.setState({ redirect: true })
-    }, 2000);
-  }
-
   handleLogout = () => {
     axios.delete("/users/logout")
       .then(response => {
-        axios.defaults.headers["Autherization"] = null
+        axios.defaults.headers["x-auth"] = null
         this.handleIsAuthenticated(false)
         localStorage.clear()
         this.setState(() => ({
+          redirect: true,
+          message: response.data.notice,
           show: true,
           msgType: "success",
-          message: response.data.notice
         }))
-        this.redirectTo()
       })
       .catch(err => {
         this.setState(() => ({
@@ -65,7 +59,12 @@ class App extends React.Component{
 
           <div className="nav-bar">
             <div>
-              <h2><Link to="/" className="nav-item">Contact Manager</Link></h2>
+              {!this.state.auth ? <h2>
+                <Link to="/" className="nav-item">
+                  Contact Manager
+                </Link>
+              </h2> : <h2 className="nav-item">Hi, {localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username :null }</h2>}
+
             </div>
             <div>
               {
@@ -100,6 +99,7 @@ class App extends React.Component{
               <Route path="/register" component={Register} exact />
               <Route path="/login" render={() => <Login handleIsAuthenticated={this.handleIsAuthenticated} />}/>
               <Route path="/account" component={Account} exact />
+              <Route path="/contact-form" component={ContactForm} exact />
             </Switch>
           </div>
         </div>

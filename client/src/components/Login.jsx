@@ -33,8 +33,9 @@ class Login extends Component {
         }
         axios.post("/users/login", formData)
             .then(response => {
-                axios.defaults.headers['Authorization'] = response.data.user.token
+                axios.defaults.headers['x-auth'] = response.data.user.token
                 localStorage.setItem("token", response.data.user.token)
+                localStorage.setItem("user", JSON.stringify(response.data.user))
                 this.props.handleIsAuthenticated(true)
                 this.setState(() => ({
                     msgType: "success",
@@ -44,12 +45,11 @@ class Login extends Component {
                 this.handleRedirect()
             })
             .catch(err => {
-                console.log(err)
-                // this.setState(() => ({
-                //     msgType: "error",
-                //     show: true,
-                //     // message: err.response.data.notice
-                // }))
+                this.setState(() => ({
+                    msgType: "error",
+                    show: true,
+                    message: err.response.data.notice
+                }))
             })
     }
 

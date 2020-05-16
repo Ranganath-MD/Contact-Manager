@@ -1,13 +1,7 @@
 const { User } = require('../models/User')
 
 const authenticateUser = function (req, res, next) {
-    if (req.header("Authorization") === undefined) {
-        res.send({
-            message : "You are not allowed to access this page, Login again"
-        })
-    } else {
-        var token = req.header('Authorization').replace("Bearer ", "")
-    }
+    const token = req.header('x-auth')
     User.findByToken(token)
         .then(function (user) {
             if (user) {
@@ -15,12 +9,12 @@ const authenticateUser = function (req, res, next) {
                 req.token = token
                 next()
             } else {
-                res.status('401').send({ notice: 'token not available' })
+                res.status('401').send({ notice: "Please login to access" })
             }
 
         })
         .catch(function (err) {
-            res.status('401').send(err)
+            res.status(401).send(err)
         })
 }
 

@@ -1,5 +1,4 @@
 .main-container {
-    padding: 5%;
     background: aliceblue;
 }
 
@@ -21,7 +20,7 @@
     align-items: center;
     border-radius: 10px;
     box-shadow: 4px 6px 30px 10px lightgrey;
-    padding: 15px;
+    padding: 6px;
     border-bottom: 4px solid orange;
 }
 
@@ -31,10 +30,11 @@
 
 .main-component {
     border-radius: 10px;
-    margin-top: 30px;
-    min-height: 500px;
-    box-shadow: 3px 4px 15px lightgrey;
+    padding: 2% 5%;
+    /* box-shadow: 3px 4px 15px lightgrey; */
     position: relative;
+    background-image: url("../bg2.svg");
+    background-position: top;
 }
 
 .home-container {
@@ -76,24 +76,47 @@
     margin-top: 0px !important;
 }
 
+.img-container .avatar1 {
+    width: 100%;
+    height: auto;
+    padding: 3px;
+    margin-top: 0px !important;
+}
+
 .img-container {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    margin-left: 10px;
+    height: 40px;
 }
 
 .contact-list {
     display: flex;
     padding: 10px 20px;
+    justify-content: space-between;
     align-items: baseline;
     box-shadow: 3px 4px 15px lightgrey;
     margin: 10px;
     position: relative;
 }
 
+.contact {
+    display: flex;
+    align-items: center;
+}
+
+.contact1 {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 15%;
+    top: 4%;
+}
+
 .contact-name {
-    font-size: 20px;
+    font-size: 15px;
     margin-left: 10px;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .contact-email {
@@ -120,8 +143,89 @@
     background-color: #ad1818 !important;
 }
 
+.Imgcontainer {
+    width: 300px;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+
+.container1 {
+    width: 100%;
+    position: relative;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container1 .img-container img {
+    cursor: pointer;
+}
+
+.container3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12%;
+}
+
+.add_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: baseline;
+    box-shadow: 3px 4px 15px lightgrey;
+    margin: 10px;
+}
+
+.form-heading {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.form-control {
+    border: 1px solid black !important;
+}
+
+.list {
+    height: 457px;
+    overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+
+.list::-webkit-scrollbar-track {
+    background: orange;
+}
+
+/* Handle */
+
+.list::-webkit-scrollbar-thumb {
+    background: rgb(114, 93, 190);
+}
+
+/* Handle on hover */
+
+.list::-webkit-scrollbar-thumb:hover {
+    background: rgb(114, 93, 190);
+}
+
 @media screen and (max-width: 702px) {
     .nav-bar {
         display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }

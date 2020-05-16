@@ -45,6 +45,19 @@ const userSchema = new Schema({
     }]
 })
 
+userSchema.statics.findByToken = function (token) {
+    const user = this
+    let tokenData
+    try {
+        tokenData = jwt.verify(token, 'jwt@123')
+    } catch (err) {
+        return Promise.reject(err)
+    }
+    return User.findOne({
+        _id: tokenData._id,
+        'tokens.token': token
+    })
+}
 
 // own static method
 userSchema.statics.findByCredentials = function (email, password) {
@@ -75,20 +88,6 @@ userSchema.statics.findByCredentials = function (email, password) {
         })
 }
 
-userSchema.statics.findByToken = function (token) {
-    const User = this
-    let tokenData
-    try {
-        tokenData = jwt.verify(token, 'jwt@123')
-    } catch (err) {
-        return Promise.reject(err)
-    }
-
-    return User.findOne({
-        _id: tokenData._id,
-        'tokens.token': token
-    })
-}
 
 // own instance methods
 userSchema.methods.generateToken = function () {

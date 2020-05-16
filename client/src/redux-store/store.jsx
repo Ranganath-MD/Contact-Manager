@@ -3,7 +3,7 @@ import contactReducer from "./Reducers"
 
 const configureStore = () => {
     const store = createStore(combineReducers({
-        contact: contactReducer
+        contact: contactReducer,
     }))
 
     return store
