@@ -28,7 +28,7 @@ class Account extends Component {
                             </p>
                             <div className="social-icons">
                                 <div style={{ width: 40, marginBottom: 15 }}>
-                                    <a href="https://github.com/Ranganath-MD/Contact-Manager" target="_blank" ><img src={GithubIcon} alt="avatar" width="100%" /></a>
+                                    <a href="https://github.com/Ranganath-MD/Contact-Manager" target="_blank" rel="noopener noreferrer"><img src={GithubIcon} alt="avatar" width="100%" /></a>
                                 </div>
                                 <p>Ranganath-MD</p>
                             </div>

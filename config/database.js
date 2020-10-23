@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
 // Set up default mongoose connection
-mongoose.connect('mongodb://localhost:27017/CM',
+mongoose.connect('mongodb+srv://ranganathmd:uOgKDhu9ZAhmOrnv@developeracc.xzfvx.mongodb.net/saveyourcontact?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useFindAndModify: false,
