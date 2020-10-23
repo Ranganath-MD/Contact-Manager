@@ -11,9 +11,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'public')));
-app.get('/', function(req, res){
-    res.send('<h2>Welcome to contact manager</h2>')
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
 
 app.use('/contacts', contactsRouter)
 app.use('/users', usersRouter)
